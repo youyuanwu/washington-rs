@@ -9,8 +9,5 @@ fn main() {
         "src/bindings.rs",
         "--filter",
         "Microsoft.States",
-        "--config",
-        "implement"
-    ])
-    .unwrap();
+    ]);
 }

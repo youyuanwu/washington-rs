@@ -1,4 +1,4 @@
-use washington_rs::States::*;
+use washington_rs::Microsoft::States::*;
 use windows::core::*;
 
 #[derive(Debug)]
@@ -9,6 +9,10 @@ struct Atlantis;
 impl IState_Impl for Atlantis_Impl {
     fn GetFlower(&self) -> Result<BSTR> {
         Ok("Red algae".into())
+    }
+
+    fn GetData2(&self) -> windows_core::PCWSTR {
+        PCWSTR::null()
     }
 }
 
