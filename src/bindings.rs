@@ -17,13 +17,13 @@ pub mod Microsoft {
         );
         windows_core::imp::interface_hierarchy!(IState, windows_core::IUnknown);
         impl IState {
-            pub unsafe fn GetFlower(&self) -> windows_core::Result<windows_core::BSTR> {
+            pub unsafe fn GetFlower(&self) -> windows_core::Result<windows_core::PCSTR> {
                 let mut result__ = core::mem::zeroed();
                 (windows_core::Interface::vtable(self).GetFlower)(
                     windows_core::Interface::as_raw(self),
                     &mut result__,
                 )
-                .map(|| core::mem::transmute(result__))
+                .map(|| result__)
             }
             pub unsafe fn GetData2(&self) -> windows_core::PCWSTR {
                 (windows_core::Interface::vtable(self).GetData2)(windows_core::Interface::as_raw(
@@ -36,19 +36,19 @@ pub mod Microsoft {
             pub base__: windows_core::IUnknown_Vtbl,
             pub GetFlower: unsafe extern "system" fn(
                 *mut core::ffi::c_void,
-                *mut *mut core::ffi::c_void,
+                *mut windows_core::PCSTR,
             ) -> windows_core::HRESULT,
             pub GetData2: unsafe extern "system" fn(*mut core::ffi::c_void) -> windows_core::PCWSTR,
         }
         pub trait IState_Impl: windows_core::IUnknownImpl {
-            fn GetFlower(&self) -> windows_core::Result<windows_core::BSTR>;
+            fn GetFlower(&self) -> windows_core::Result<windows_core::PCSTR>;
             fn GetData2(&self) -> windows_core::PCWSTR;
         }
         impl IState_Vtbl {
             pub const fn new<Identity: IState_Impl, const OFFSET: isize>() -> Self {
                 unsafe extern "system" fn GetFlower<Identity: IState_Impl, const OFFSET: isize>(
                     this: *mut core::ffi::c_void,
-                    flower: *mut *mut core::ffi::c_void,
+                    flower: *mut windows_core::PCSTR,
                 ) -> windows_core::HRESULT {
                     let this: &Identity =
                         &*((this as *const *const ()).offset(OFFSET) as *const Identity);

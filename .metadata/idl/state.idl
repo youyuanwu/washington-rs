@@ -11,7 +11,7 @@ import "propidl.idl";
 ]
 interface IState: IUnknown
 {
-    HRESULT GetFlower([out, retval] BSTR* flower);
+    HRESULT GetFlower([out, retval] LPCSTR* flower);
 
     LPCWSTR GetData2();
 }
