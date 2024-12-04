@@ -2,7 +2,7 @@
 name = "washington-rs"
 version = "0.4.0"
 authors = [""]
-edition = "2018"
+edition = "2021"
 license = "MIT OR Apache-2.0"
 description = "Rust for Washington SDK"
 repository = ""
@@ -22,7 +22,11 @@ targets = []
 [dependencies.windows]
 version = "0.58.0"
 
-[dependencies.windows-core]
+# [dependencies.windows-core]
+# version = "0.58.0"
+
+[dependencies.external_windows_core]
+package = "windows-core"
 version = "0.58.0"
 
 [build-dependencies.windows-bindgen]

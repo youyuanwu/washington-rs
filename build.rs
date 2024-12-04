@@ -1,3 +1,4 @@
+#[cfg(target_os = "windows")]
 fn main() {
     println!("cargo:rerun-if-changed=.windows/winmd/Microsoft.States.winmd");
     println!("cargo:rerun-if-changed=build.rs");
@@ -11,3 +12,6 @@ fn main() {
         "Microsoft.States",
     ]);
 }
+
+#[cfg(target_os = "linux")]
+fn main() {}

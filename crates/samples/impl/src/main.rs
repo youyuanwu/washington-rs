@@ -1,7 +1,7 @@
 use std::ffi::CString;
 
-use washington_rs::Microsoft::States::*;
-use windows::core::*;
+use washington_rs::{Microsoft::States::*, PCSTR, PCWSTR};
+use windows_core::*;
 
 #[derive(Debug)]
 #[implement(IState)]
@@ -11,23 +11,23 @@ struct Atlantis {
 
 #[allow(non_snake_case)]
 impl IState_Impl for Atlantis_Impl {
-    fn GetFlower(&self) -> Result<windows_core::PCSTR> {
+    fn GetFlower(&self) -> Result<PCSTR> {
         Ok(PCSTR(self.flower.as_ptr() as *const u8))
     }
 
-    fn GetData2(&self) -> windows_core::PCWSTR {
-        PCWSTR::null()
+    fn GetData2(&self) -> PCWSTR {
+        PCWSTR(std::ptr::null())
     }
 }
 
-fn main() -> windows::core::Result<()> {
+fn main() -> windows_core::Result<()> {
     let state: IState = Atlantis {
         flower: CString::new("Red Algae").unwrap(),
     }
     .into();
 
     let ptr = unsafe { state.GetFlower() }?;
-    let flower = CString::new(unsafe { ptr.as_bytes() }).unwrap();
+    let flower = unsafe { std::ffi::CStr::from_ptr(ptr.0 as *const i8) };
     println!("{:?}", flower);
     Ok(())
 }
